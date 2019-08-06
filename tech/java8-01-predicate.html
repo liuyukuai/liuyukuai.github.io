@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>java8系列：函数接口之Predicate | 刘愉快的博客</title>
+    <meta name="description" content="talk is cheap, show me your code">
+    <link rel="icon" href="/favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.f6851317.css" as="style"><link rel="preload" href="/assets/js/app.a182c574.js" as="script"><link rel="preload" href="/assets/js/44.02ee5a13.js" as="script"><link rel="prefetch" href="/assets/js/22.e0f9b22c.js"><link rel="prefetch" href="/assets/js/2.af32a167.js"><link rel="prefetch" href="/assets/js/3.0d8f9836.js"><link rel="prefetch" href="/assets/js/4.45fde388.js"><link rel="prefetch" href="/assets/js/5.c237ac7c.js"><link rel="prefetch" href="/assets/js/6.a7f6f7f5.js"><link rel="prefetch" href="/assets/js/7.dd791c92.js"><link rel="prefetch" href="/assets/js/8.fd5dc064.js"><link rel="prefetch" href="/assets/js/9.3fe2eaab.js"><link rel="prefetch" href="/assets/js/10.3650c357.js"><link rel="prefetch" href="/assets/js/11.83efe040.js"><link rel="prefetch" href="/assets/js/12.68861bfc.js"><link rel="prefetch" href="/assets/js/13.2c96f5f2.js"><link rel="prefetch" href="/assets/js/14.c738a17d.js"><link rel="prefetch" href="/assets/js/15.44c6aa0e.js"><link rel="prefetch" href="/assets/js/16.20e90af0.js"><link rel="prefetch" href="/assets/js/17.336ec91b.js"><link rel="prefetch" href="/assets/js/18.fec34f25.js"><link rel="prefetch" href="/assets/js/19.b0c35fcd.js"><link rel="prefetch" href="/assets/js/20.50623856.js"><link rel="prefetch" href="/assets/js/21.59447525.js"><link rel="prefetch" href="/assets/js/23.a5a66be0.js"><link rel="prefetch" href="/assets/js/24.6ebbaec3.js"><link rel="prefetch" href="/assets/js/25.02be3ace.js"><link rel="prefetch" href="/assets/js/26.6ae2a81c.js"><link rel="prefetch" href="/assets/js/27.5ff97c6d.js"><link rel="prefetch" href="/assets/js/28.f39f5c17.js"><link rel="prefetch" href="/assets/js/29.157090a4.js"><link rel="prefetch" href="/assets/js/30.f0a9eb14.js"><link rel="prefetch" href="/assets/js/31.cefbc3dd.js"><link rel="prefetch" href="/assets/js/32.9009e4f7.js"><link rel="prefetch" href="/assets/js/33.9731dadf.js"><link rel="prefetch" href="/assets/js/34.fa31af43.js"><link rel="prefetch" href="/assets/js/35.ff2f6407.js"><link rel="prefetch" href="/assets/js/36.d5a99da8.js"><link rel="prefetch" href="/assets/js/37.bbfdf062.js"><link rel="prefetch" href="/assets/js/38.6032701d.js"><link rel="prefetch" href="/assets/js/39.bfcbb5a9.js"><link rel="prefetch" href="/assets/js/40.c2577be3.js"><link rel="prefetch" href="/assets/js/41.5806e1f0.js"><link rel="prefetch" href="/assets/js/42.aa5a33a7.js"><link rel="prefetch" href="/assets/js/43.d3b1fd98.js"><link rel="prefetch" href="/assets/js/45.bfa5dadc.js"><link rel="prefetch" href="/assets/js/46.58b398ec.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f6851317.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">刘愉快的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link router-link-active">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link router-link-active">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav> <div class="carbon-ads"><div style="text-align: center"><a target="_blank" href="https://chuangke.aliyun.com/invite?userCode=gnzlz2if"><img src="/d467587b34de6f2c472e345868699a11.jpg"></a></div></div> <ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading open"><span></span> <span class="arrow down"></span></p> <ul class="sidebar-group-items"></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="java8系列：函数接口之predicate"><a href="#java8系列：函数接口之predicate" aria-hidden="true" class="header-anchor">#</a> java8系列：函数接口之Predicate</h1> <p>Predicate函数式接口的主要作用就是提供一个test方法，接受一个参数返回一个布尔类型，即判断输入的对象是否符合某个条件。</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>function<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Objects<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * Represents a predicate (boolean-valued function) of one argument.
+ *
+ * &lt;p&gt;This is a &lt;a href=&quot;package-summary.html&quot;&gt;functional interface&lt;/a&gt;
+ * whose functional method is {@link #test(Object)}.
+ *
+ * @param &lt;T&gt; the type of the input to the predicate
+ *
+ * @since 1.8
+ */</span>
+<span class="token annotation punctuation">@FunctionalInterface</span>
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">Predicate</span><span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token punctuation">{</span>
+
+    <span class="token comment">/**
+     * Evaluates this predicate on the given argument.
+     *
+     * @param t the input argument
+     * @return {@code true} if the input argument matches the predicate,
+     * otherwise {@code false}
+     */</span>
+    <span class="token keyword">boolean</span> <span class="token function">test</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">/**
+     * Returns a composed predicate that represents a short-circuiting logical
+     * AND of this predicate and another.  When evaluating the composed
+     * predicate, if this predicate is {@code false}, then the {@code other}
+     * predicate is not evaluated.
+     *
+     * &lt;p&gt;Any exceptions thrown during evaluation of either predicate are relayed
+     * to the caller; if evaluation of this predicate throws an exception, the
+     * {@code other} predicate will not be evaluated.
+     *
+     * @param other a predicate that will be logically-ANDed with this
+     *              predicate
+     * @return a composed predicate that represents the short-circuiting logical
+     * AND of this predicate and the {@code other} predicate
+     * @throws NullPointerException if other is null
+     */</span>
+    <span class="token keyword">default</span> Predicate<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token function">and</span><span class="token punctuation">(</span>Predicate<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">&gt;</span> other<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Objects<span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>other<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token function">test</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> other<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Returns a predicate that represents the logical negation of this
+     * predicate.
+     *
+     * @return a predicate that represents the logical negation of this
+     * predicate
+     */</span>
+    <span class="token keyword">default</span> Predicate<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token function">negate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token operator">!</span><span class="token function">test</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Returns a composed predicate that represents a short-circuiting logical
+     * OR of this predicate and another.  When evaluating the composed
+     * predicate, if this predicate is {@code true}, then the {@code other}
+     * predicate is not evaluated.
+     *
+     * &lt;p&gt;Any exceptions thrown during evaluation of either predicate are relayed
+     * to the caller; if evaluation of this predicate throws an exception, the
+     * {@code other} predicate will not be evaluated.
+     *
+     * @param other a predicate that will be logically-ORed with this
+     *              predicate
+     * @return a composed predicate that represents the short-circuiting logical
+     * OR of this predicate and the {@code other} predicate
+     * @throws NullPointerException if other is null
+     */</span>
+    <span class="token keyword">default</span> Predicate<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token function">or</span><span class="token punctuation">(</span>Predicate<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">&gt;</span> other<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Objects<span class="token punctuation">.</span><span class="token function">requireNonNull</span><span class="token punctuation">(</span>other<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> <span class="token function">test</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">||</span> other<span class="token punctuation">.</span><span class="token function">test</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * Returns a predicate that tests if two arguments are equal according
+     * to {@link Objects#equals(Object, Object)}.
+     *
+     * @param &lt;T&gt; the type of arguments to the predicate
+     * @param targetRef the object reference with which to compare for equality,
+     *               which may be {@code null}
+     * @return a predicate that tests if two arguments are equal according
+     * to {@link Objects#equals(Object, Object)}
+     */</span>
+    <span class="token keyword">static</span> <span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> Predicate<span class="token generics function"><span class="token punctuation">&lt;</span>T<span class="token punctuation">&gt;</span></span> <span class="token function">isEqual</span><span class="token punctuation">(</span>Object targetRef<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>null <span class="token operator">==</span> targetRef<span class="token punctuation">)</span>
+                <span class="token operator">?</span> Objects<span class="token operator">:</span><span class="token operator">:</span>isNull
+                <span class="token operator">:</span> object <span class="token operator">-</span><span class="token operator">&gt;</span> targetRef<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="方法详解"><a href="#方法详解" aria-hidden="true" class="header-anchor">#</a> 方法详解</h2> <p>在Predicate接口中，总共有5个方法，除了test()是抽象方法外，其他为默认方法和静态方法。</p> <div class="tip custom-block"><p class="custom-block-title">其他方法说明</p> <ul><li>test：判断输入的对象是否符合某个条件，满足条件返回true，否则返回false。</li> <li>and: 将多个函数接口组合成一个新的函数接口，并且多个函数是并且的关系。</li> <li>or: 将多个函数接口组合成一个新的函数接口，并且多个函数是或的关系。</li> <li>negate：取反，构造当前predicate函数的取反函数</li> <li>isEqual：判断两个对象是否相等，等价于Objects.equals(obj2,obj2)</li></ul></div> <h2 id="案例"><a href="#案例" aria-hidden="true" class="header-anchor">#</a> 案例</h2> <h3 id="需求"><a href="#需求" aria-hidden="true" class="header-anchor">#</a> 需求</h3> <p>有一框苹果，</p> <h3 id="编写代码"><a href="#编写代码" aria-hidden="true" class="header-anchor">#</a> 编写代码</h3></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/44.02ee5a13.js" defer></script><script src="/assets/js/app.a182c574.js" defer></script>
+  </body>
+</html>

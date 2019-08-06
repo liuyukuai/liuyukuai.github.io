@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SpringBoot系列：SpringBootApplication详解 | 刘愉快的博客</title>
+    <meta name="description" content="talk is cheap, show me your code">
+    <link rel="icon" href="/favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.f6851317.css" as="style"><link rel="preload" href="/assets/js/app.a182c574.js" as="script"><link rel="preload" href="/assets/js/32.9009e4f7.js" as="script"><link rel="prefetch" href="/assets/js/22.e0f9b22c.js"><link rel="prefetch" href="/assets/js/2.af32a167.js"><link rel="prefetch" href="/assets/js/3.0d8f9836.js"><link rel="prefetch" href="/assets/js/4.45fde388.js"><link rel="prefetch" href="/assets/js/5.c237ac7c.js"><link rel="prefetch" href="/assets/js/6.a7f6f7f5.js"><link rel="prefetch" href="/assets/js/7.dd791c92.js"><link rel="prefetch" href="/assets/js/8.fd5dc064.js"><link rel="prefetch" href="/assets/js/9.3fe2eaab.js"><link rel="prefetch" href="/assets/js/10.3650c357.js"><link rel="prefetch" href="/assets/js/11.83efe040.js"><link rel="prefetch" href="/assets/js/12.68861bfc.js"><link rel="prefetch" href="/assets/js/13.2c96f5f2.js"><link rel="prefetch" href="/assets/js/14.c738a17d.js"><link rel="prefetch" href="/assets/js/15.44c6aa0e.js"><link rel="prefetch" href="/assets/js/16.20e90af0.js"><link rel="prefetch" href="/assets/js/17.336ec91b.js"><link rel="prefetch" href="/assets/js/18.fec34f25.js"><link rel="prefetch" href="/assets/js/19.b0c35fcd.js"><link rel="prefetch" href="/assets/js/20.50623856.js"><link rel="prefetch" href="/assets/js/21.59447525.js"><link rel="prefetch" href="/assets/js/23.a5a66be0.js"><link rel="prefetch" href="/assets/js/24.6ebbaec3.js"><link rel="prefetch" href="/assets/js/25.02be3ace.js"><link rel="prefetch" href="/assets/js/26.6ae2a81c.js"><link rel="prefetch" href="/assets/js/27.5ff97c6d.js"><link rel="prefetch" href="/assets/js/28.f39f5c17.js"><link rel="prefetch" href="/assets/js/29.157090a4.js"><link rel="prefetch" href="/assets/js/30.f0a9eb14.js"><link rel="prefetch" href="/assets/js/31.cefbc3dd.js"><link rel="prefetch" href="/assets/js/33.9731dadf.js"><link rel="prefetch" href="/assets/js/34.fa31af43.js"><link rel="prefetch" href="/assets/js/35.ff2f6407.js"><link rel="prefetch" href="/assets/js/36.d5a99da8.js"><link rel="prefetch" href="/assets/js/37.bbfdf062.js"><link rel="prefetch" href="/assets/js/38.6032701d.js"><link rel="prefetch" href="/assets/js/39.bfcbb5a9.js"><link rel="prefetch" href="/assets/js/40.c2577be3.js"><link rel="prefetch" href="/assets/js/41.5806e1f0.js"><link rel="prefetch" href="/assets/js/42.aa5a33a7.js"><link rel="prefetch" href="/assets/js/43.d3b1fd98.js"><link rel="prefetch" href="/assets/js/44.02ee5a13.js"><link rel="prefetch" href="/assets/js/45.bfa5dadc.js"><link rel="prefetch" href="/assets/js/46.58b398ec.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f6851317.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">刘愉快的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav> <div class="carbon-ads"><div style="text-align: center"><a target="_blank" href="https://chuangke.aliyun.com/invite?userCode=gnzlz2if"><img src="/d467587b34de6f2c472e345868699a11.jpg"></a></div></div> <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>SpringBoot系列</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/spring-boot/spring-boot-introduce.html" class="sidebar-link">SpringBoot系列：简介</a></li><li><a href="/spring-boot/spring-boot-quick-start.html" class="sidebar-link">SpringBoot系列：快速入门</a></li><li><a href="/spring-boot/spring-boot-deploy.html" class="sidebar-link">SpringBoot系列：部署</a></li><li><a href="/spring-boot/spring-boot-dependencies.html" class="sidebar-link">SpringBoot系列：自定义Parent工程</a></li><li><a href="/spring-boot/spring-boot-configuration.html" class="sidebar-link">SpringBoot系列：@Configuration</a></li><li><a href="/spring-boot/spring-boot-configuration-properties.html" class="sidebar-link">SpringBoot系列：@ConfigurationProperties</a></li><li><a href="/spring-boot/spring-boot-logging.html" class="sidebar-link">SpringBoot系列：日志框架-Log4j2</a></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="springboot系列：springbootapplication详解"><a href="#springboot系列：springbootapplication详解" aria-hidden="true" class="header-anchor">#</a> SpringBoot系列：SpringBootApplication详解</h1> <h2 id="软件环境"><a href="#软件环境" aria-hidden="true" class="header-anchor">#</a> 软件环境</h2> <ul><li>Spring Boot 2.0.4.RELEASE</li> <li>JDK 1.8.0_181</li> <li>Maven 3.5.4</li> <li>IntelliJ IDEA 2018.1.6</li></ul> <div class="tip custom-block"><p class="custom-block-title">疑问</p> <p>在<a href="/spring-boot/spring-boot-quick-start.html">快速入门</a>中，我们只需要启动main方法，整个spring容器就可以正常运行，这是如何做到的呢？</p></div> <p>查看SpringBootApplication这个注解源码，发现是一个复合注解，包括@ComponentScan，和@SpringBootConfiguration，@EnableAutoConfiguration</p> <div class="language-java extra-class"><pre class="language-java"><code>
+
+<span class="token keyword">package</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>autoconfigure<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Documented<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ElementType<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Inherited<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Retention<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>RetentionPolicy<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>lang<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Target<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringBootConfiguration<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>context<span class="token punctuation">.</span>TypeExcludeFilter<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>FilterType<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">.</span>Filter<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>core<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>AliasFor<span class="token punctuation">;</span>
+
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">{</span>ElementType<span class="token punctuation">.</span>TYPE<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span>RetentionPolicy<span class="token punctuation">.</span>RUNTIME<span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token annotation punctuation">@Inherited</span>
+<span class="token annotation punctuation">@SpringBootConfiguration</span>
+<span class="token annotation punctuation">@EnableAutoConfiguration</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span>
+    excludeFilters <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>
+    type <span class="token operator">=</span> FilterType<span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span>
+    classes <span class="token operator">=</span> <span class="token punctuation">{</span>TypeExcludeFilter<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token annotation punctuation">@Filter</span><span class="token punctuation">(</span>
+    type <span class="token operator">=</span> FilterType<span class="token punctuation">.</span>CUSTOM<span class="token punctuation">,</span>
+    classes <span class="token operator">=</span> <span class="token punctuation">{</span>AutoConfigurationExcludeFilter<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+<span class="token keyword">public</span> @<span class="token keyword">interface</span> <span class="token class-name">SpringBootApplication</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@AliasFor</span><span class="token punctuation">(</span>
+        annotation <span class="token operator">=</span> EnableAutoConfiguration<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+        attribute <span class="token operator">=</span> <span class="token string">&quot;exclude&quot;</span>
+    <span class="token punctuation">)</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">exclude</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@AliasFor</span><span class="token punctuation">(</span>
+        annotation <span class="token operator">=</span> EnableAutoConfiguration<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+        attribute <span class="token operator">=</span> <span class="token string">&quot;excludeName&quot;</span>
+    <span class="token punctuation">)</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">excludeName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@AliasFor</span><span class="token punctuation">(</span>
+        annotation <span class="token operator">=</span> ComponentScan<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+        attribute <span class="token operator">=</span> <span class="token string">&quot;basePackages&quot;</span>
+    <span class="token punctuation">)</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">scanBasePackages</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+    <span class="token annotation punctuation">@AliasFor</span><span class="token punctuation">(</span>
+        annotation <span class="token operator">=</span> ComponentScan<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span>
+        attribute <span class="token operator">=</span> <span class="token string">&quot;basePackageClasses&quot;</span>
+    <span class="token punctuation">)</span>
+    Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">scanBasePackageClasses</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="springbootconfiguration"><a href="#springbootconfiguration" aria-hidden="true" class="header-anchor">#</a> @SpringBootConfiguration</h2> <div class="tip custom-block"><p class="custom-block-title">说明</p> <p>@SpringBootConfiguration继承自@Configuration，二者功能也一致，标注当前类是配置类，并会将当前类内声明的一个或多个以@Bean注解标记的方法的实例纳入到srping容器中，并且实例名就是方法名。</p></div> <div class="language-java extra-class"><pre class="language-java"><code>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>config<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringBootConfiguration<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>Bean<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@SpringBootConfiguration</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BootConfiguration</span> <span class="token punctuation">{</span>
+
+
+    <span class="token comment">/**
+     * 代表在spring容器中创建了一个名字为userMap的对象，值为该方法的返回值。
+     *
+     * @return map对象
+     */</span>
+    <span class="token annotation punctuation">@Bean</span>
+    <span class="token keyword">public</span> Map<span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> String<span class="token punctuation">&gt;</span></span> <span class="token function">userMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Map<span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> String<span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;id&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;id&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> map<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="language-java extra-class"><pre class="language-java"><code>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>demo<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>autoconfigure<span class="token punctuation">.</span>SpringBootApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ConfigurableApplicationContext<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@SpringBootApplication</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DemoSpringBootSpringBootConfigurationApplication</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ConfigurableApplicationContext applicationContext <span class="token operator">=</span> SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>DemoSpringBootSpringBootConfigurationApplication<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Map<span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token punctuation">&gt;</span></span> userMap <span class="token operator">=</span> <span class="token punctuation">(</span>Map<span class="token generics function"><span class="token punctuation">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token punctuation">&gt;</span></span><span class="token punctuation">)</span> applicationContext<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span><span class="token string">&quot;userMap&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        userMap<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span> v<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">&gt;</span> System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>k <span class="token operator">+</span> <span class="token string">&quot;=&quot;</span> <span class="token operator">+</span> v<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><h2 id="componentscan"><a href="#componentscan" aria-hidden="true" class="header-anchor">#</a> @ComponentScan</h2> <ul><li>有以下目录结构程序</li></ul> <div class="language- extra-class"><pre class="language-text"><code>---- package1
+-------- Package1.java
+-------- Package1Application.java
+---- package2
+-------- Package2.java
+-------- Package2Application.java
+---- package3
+-------- Package3.java
+-------- Package3Application.java
+---- Application.java
+</code></pre></div><ul><li>Application.java</li></ul> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package1<span class="token punctuation">.</span>Package1<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package2<span class="token punctuation">.</span>Package2<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ConfigurableApplicationContext<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@ComponentScan</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ConfigurableApplicationContext context <span class="token operator">=</span> SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Package2 package2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package2<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package2 = &quot;</span> <span class="token operator">+</span> package2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        Package1 package1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package1<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package1 = &quot;</span> <span class="token operator">+</span> package1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 执行结果，都有值说明都扫描到了</span>
+<span class="token comment">//        package2 = com.itxiaoer.package2.Package2@750fe12e</span>
+<span class="token comment">//        package1 = com.itxiaoer.package1.Package1@f8908f6</span>
+        
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+
+</code></pre></div><ul><li>Package1Application.java</li></ul> <div class="language-java extra-class"><pre class="language-java"><code>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package1<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package2<span class="token punctuation">.</span>Package2<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ConfigurableApplicationContext<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@ComponentScan</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Package1Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ConfigurableApplicationContext context <span class="token operator">=</span> SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>Package1Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Package1 package1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package1<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package1 = &quot;</span> <span class="token operator">+</span> package1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Package2 package2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package2<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package2 = &quot;</span> <span class="token operator">+</span> package2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment">// 执行结果 package1对象扫描到了，package2没有扫描到</span>
+        <span class="token comment">// package1 = com.itxiaoer.package1.Package1@34cdeda2</span>
+        <span class="token comment">//  No qualifying bean of type 'com.itxiaoer.package2.Package2' available</span>
+
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>Package2Application.java</li></ul> <div class="language-java extra-class"><pre class="language-java"><code>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package2<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package1<span class="token punctuation">.</span>Package1<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ConfigurableApplicationContext<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@ComponentScan</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Package2Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ConfigurableApplicationContext context <span class="token operator">=</span> SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>Package2Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Package2 package2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package2<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package2 = &quot;</span> <span class="token operator">+</span> package2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        Package1 package1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package1<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package1 = &quot;</span> <span class="token operator">+</span> package1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 执行结果 package1对象扫描到了，package2没有扫描到</span>
+        <span class="token comment">// package2 = com.itxiaoer.package2.Package2@305a0c5f</span>
+        <span class="token comment">//  No qualifying bean of type 'com.itxiaoer.package1.Package1' available</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>Package3Application.java</li></ul> <div class="language-java extra-class"><pre class="language-java"><code>
+<span class="token keyword">package</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package3<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package1<span class="token punctuation">.</span>Package1<span class="token punctuation">;</span>
+<span class="token keyword">import</span> com<span class="token punctuation">.</span>itxiaoer<span class="token punctuation">.</span>package2<span class="token punctuation">.</span>Package2<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span>SpringApplication<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>ConfigurableApplicationContext<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>context<span class="token punctuation">.</span>annotation<span class="token punctuation">.</span>ComponentScan<span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * @author : liuyk
+ */</span>
+<span class="token annotation punctuation">@ComponentScan</span><span class="token punctuation">(</span><span class="token string">&quot;com.itxiaoer.package1,com.itxiaoer.package2&quot;</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Package3Application</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ConfigurableApplicationContext context <span class="token operator">=</span> SpringApplication<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>Package3Application<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> args<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        Package1 package1 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package1<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package1 = &quot;</span> <span class="token operator">+</span> package1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        Package2 package2 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package2<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package2 = &quot;</span> <span class="token operator">+</span> package2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        Package3 package3 <span class="token operator">=</span> context<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>Package3<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;package3 = &quot;</span> <span class="token operator">+</span> package3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 执行结果 指定扫描的包都扫描到了，没有指定的包无法扫描</span>
+<span class="token comment">//        package1 = com.itxiaoer.package1.Package1@1ecee32c</span>
+<span class="token comment">//        package2 = com.itxiaoer.package2.Package2@4535b6d5</span>
+<span class="token comment">//        No qualifying bean of type 'com.itxiaoer.package3.Package3' available</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><div class="tip custom-block"><p class="custom-block-title">总结</p> <ul><li>@ComponentScan默认只当前包以及子包下被@Component，@Controller，@RestController，@Service，@Repository等标记的类</li> <li>@ComponentScan若想当前包以及子包以外的包，需要显示的指定</li> <li>@ComponentScan和以前的&lt;context:component-scan/&gt;（以前使用在xml中使用的标签，用来扫描包配置的平行支持）</li> <li>@ComponentScan若指定了包名，那么就只会扫描指定的包以及指定包的子包</li></ul></div> <h2 id="enableautoconfiguration"><a href="#enableautoconfiguration" aria-hidden="true" class="header-anchor">#</a> @EnableAutoConfiguration</h2></div> <div class="page-edit"><!----> <!----></div> <!----> </div> <!----></div></div>
+    <script src="/assets/js/32.9009e4f7.js" defer></script><script src="/assets/js/app.a182c574.js" defer></script>
+  </body>
+</html>

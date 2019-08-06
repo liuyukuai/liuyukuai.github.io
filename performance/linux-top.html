@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Linux命令：top | 刘愉快的博客</title>
+    <meta name="description" content="talk is cheap, show me your code">
+    <link rel="icon" href="/favicon.ico">
+    
+    <link rel="preload" href="/assets/css/0.styles.f6851317.css" as="style"><link rel="preload" href="/assets/js/app.a182c574.js" as="script"><link rel="preload" href="/assets/js/29.157090a4.js" as="script"><link rel="prefetch" href="/assets/js/22.e0f9b22c.js"><link rel="prefetch" href="/assets/js/2.af32a167.js"><link rel="prefetch" href="/assets/js/3.0d8f9836.js"><link rel="prefetch" href="/assets/js/4.45fde388.js"><link rel="prefetch" href="/assets/js/5.c237ac7c.js"><link rel="prefetch" href="/assets/js/6.a7f6f7f5.js"><link rel="prefetch" href="/assets/js/7.dd791c92.js"><link rel="prefetch" href="/assets/js/8.fd5dc064.js"><link rel="prefetch" href="/assets/js/9.3fe2eaab.js"><link rel="prefetch" href="/assets/js/10.3650c357.js"><link rel="prefetch" href="/assets/js/11.83efe040.js"><link rel="prefetch" href="/assets/js/12.68861bfc.js"><link rel="prefetch" href="/assets/js/13.2c96f5f2.js"><link rel="prefetch" href="/assets/js/14.c738a17d.js"><link rel="prefetch" href="/assets/js/15.44c6aa0e.js"><link rel="prefetch" href="/assets/js/16.20e90af0.js"><link rel="prefetch" href="/assets/js/17.336ec91b.js"><link rel="prefetch" href="/assets/js/18.fec34f25.js"><link rel="prefetch" href="/assets/js/19.b0c35fcd.js"><link rel="prefetch" href="/assets/js/20.50623856.js"><link rel="prefetch" href="/assets/js/21.59447525.js"><link rel="prefetch" href="/assets/js/23.a5a66be0.js"><link rel="prefetch" href="/assets/js/24.6ebbaec3.js"><link rel="prefetch" href="/assets/js/25.02be3ace.js"><link rel="prefetch" href="/assets/js/26.6ae2a81c.js"><link rel="prefetch" href="/assets/js/27.5ff97c6d.js"><link rel="prefetch" href="/assets/js/28.f39f5c17.js"><link rel="prefetch" href="/assets/js/30.f0a9eb14.js"><link rel="prefetch" href="/assets/js/31.cefbc3dd.js"><link rel="prefetch" href="/assets/js/32.9009e4f7.js"><link rel="prefetch" href="/assets/js/33.9731dadf.js"><link rel="prefetch" href="/assets/js/34.fa31af43.js"><link rel="prefetch" href="/assets/js/35.ff2f6407.js"><link rel="prefetch" href="/assets/js/36.d5a99da8.js"><link rel="prefetch" href="/assets/js/37.bbfdf062.js"><link rel="prefetch" href="/assets/js/38.6032701d.js"><link rel="prefetch" href="/assets/js/39.bfcbb5a9.js"><link rel="prefetch" href="/assets/js/40.c2577be3.js"><link rel="prefetch" href="/assets/js/41.5806e1f0.js"><link rel="prefetch" href="/assets/js/42.aa5a33a7.js"><link rel="prefetch" href="/assets/js/43.d3b1fd98.js"><link rel="prefetch" href="/assets/js/44.02ee5a13.js"><link rel="prefetch" href="/assets/js/45.bfa5dadc.js"><link rel="prefetch" href="/assets/js/46.58b398ec.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.f6851317.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">刘愉快的博客</span></a> <div class="links" style="max-width:nullpx;"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link router-link-active">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">主页</a></div><div class="nav-item"><a href="/tech/" class="nav-link">技术博文</a></div><div class="nav-item"><a href="/performance/" class="nav-link router-link-active">性能优化</a></div><div class="nav-item"><a href="/bug/" class="nav-link">问题</a></div><div class="nav-item"><a href="https://github.com/liuyukuai" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav> <div class="carbon-ads"><div style="text-align: center"><a target="_blank" href="https://chuangke.aliyun.com/invite?userCode=gnzlz2if"><img src="/d467587b34de6f2c472e345868699a11.jpg"></a></div></div> <ul class="sidebar-links"><li><div class="sidebar-group first"><p class="sidebar-heading open"><span>性能优化</span> <!----></p> <ul class="sidebar-group-items"><li><a href="/performance/linux-uptime.html" class="sidebar-link">Linux命令：uptime</a></li><li><a href="/performance/linux-top.html" class="active sidebar-link">Linux命令：top</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/performance/linux-top.html#环境" class="sidebar-link">环境</a></li><li class="sidebar-sub-header"><a href="/performance/linux-top.html#功能" class="sidebar-link">功能</a></li><li class="sidebar-sub-header"><a href="/performance/linux-top.html#输出结果" class="sidebar-link">输出结果</a></li></ul></li></ul></div></li></ul> </div> <div class="page"> <div class="content"><h1 id="linux命令：top"><a href="#linux命令：top" aria-hidden="true" class="header-anchor">#</a> Linux命令：top</h1> <h2 id="环境"><a href="#环境" aria-hidden="true" class="header-anchor">#</a> 环境</h2> <ul><li>CentOS Linux release 7.3.1611 (Core)</li></ul> <h2 id="功能"><a href="#功能" aria-hidden="true" class="header-anchor">#</a> 功能</h2> <p>Linux下常用的性能分析工具，主要用来监控系统实时负载率、进程的资源占用率及其它各项系统状态属性是否正常。</p> <ul><li>命令格式</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">top</span> 
+</code></pre></div><ul><li>参数说明</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code>-b： 批处理模式。通常用在脚本中，不断输出信息
+-c： 显示包含路径的命令行，而不只是程序名称
+-d： 指定信息刷新的时间间隔（默认是5s）
+-i： 不显示闲置或者僵死进程
+-n： 指定显示的次数。一般与-b搭配使用
+-p： 指定进程号。可以指定多个pid
+-s： 使top命令在安全模式中运行
+-S： 指定累积模式，每个进程的CPU时间为该进程及关闭的子进程锁累加的时间
+-u： 指定用户名
+</code></pre></div><ul><li>交互命令</li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code>c： 显示完整的命令
+d： 更改刷新频率
+f： 增加或减少要显示的列<span class="token punctuation">(</span>选中的会变成大写并加*号<span class="token punctuation">)</span>
+F： 选择排序的列
+h： 显示帮助画面
+H： 显示线程
+i： 忽略闲置和僵死进程
+k： 通过给予一个PID和一个signal来终止一个进程。（默认signal为15。在安全模式中此命令被屏蔽）
+l:  显示平均负载以及启动时间（即显示影藏第一行）
+m： 显示内存信息
+M： 根据内存资源使用大小进行排序
+N： 按PID由高到低排列
+o： 改变列显示的顺序
+O： 选择排序的列，与F完全相同
+P： 根据CPU资源使用大小进行排序
+q： 退出top命令
+r： 修改进程的nice值<span class="token punctuation">(</span>优先级<span class="token punctuation">)</span>。优先级默认为10，正值使优先级降低，反之则提高的优先级
+s： 设置刷新频率（默认单位为秒，如有小数则换算成ms）。默认值是5s，输入0值则系统将不断刷新
+S： 累计模式（把已完成或退出的子进程占用的CPU时间累计到父进程的MITE+ ）
+T： 根据进程使用CPU的累积时间排序
+t： 显示进程和CPU状态信息（即显示影藏CPU行）
+u： 指定用户进程
+W： 将当前设置写入~/.toprc文件，下次启动自动调用toprc文件的设置
+<span class="token operator">&lt;</span>： 向前翻页
+<span class="token operator">&gt;</span>： 向后翻页
+?： 显示帮助画面
+1<span class="token punctuation">(</span>数字1<span class="token punctuation">)</span>： 显示每个CPU的详细情况
+</code></pre></div><h2 id="输出结果"><a href="#输出结果" aria-hidden="true" class="header-anchor">#</a> 输出结果</h2> <div class="language-shell extra-class"><pre class="language-shell"><code>$ <span class="token function">top</span>
+
+<span class="token function">top</span> - 22:46:56 up 3 days, 13:22,  3 users,  load average: 0.00, 0.02, 0.05
+Tasks:  65 total,   1 running,  64 sleeping,   0 stopped,   0 zombie
+%Cpu<span class="token punctuation">(</span>s<span class="token punctuation">)</span>:  0.3 us,  0.0 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem <span class="token keyword">:</span>  1016164 total,   388300 free,    58204 used,   569660 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   799148 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND                                                               
+  813 root      20   0   31636   3100   2484 S  0.3  0.3   1:17.38 AliYunDunUpdate                                                       
+    1 root      20   0   43172   3400   2284 S  0.0  0.3   0:02.58 systemd                                                               
+    2 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kthreadd                                                              
+    3 root      20   0       0      0      0 S  0.0  0.0   0:01.07 ksoftirqd/0                                                           
+    5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H                                                          
+    6 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kworker/u2:0                                                          
+    7 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0                                                           
+    8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh                                                                
+    9 root      20   0       0      0      0 S  0.0  0.0   0:07.95 rcu_sched                                                             
+   10 root      rt   0       0      0      0 S  0.0  0.0   0:01.48 watchdog/0                                                            
+   12 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kdevtmpfs                                                             
+   13 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 netns                                                                 
+   14 root      20   0       0      0      0 S  0.0  0.0   0:00.06 khungtaskd                                                            
+   15 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 writeback                                                             
+   16 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kintegrityd                                                           
+   17 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 bioset                                                                
+   18 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kblockd                                                               
+   19 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 md                                                                    
+   25 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kswapd0                                                               
+   26 root      25   5       0      0      0 S  0.0  0.0   0:00.00 ksmd                                                                  
+   27 root      39  19       0      0      0 S  0.0  0.0   0:00.83 khugepaged                                                            
+   28 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 crypto                                                                
+   36 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kthrotld                                                              
+   38 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kmpath_rdacd                                                          
+   39 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kpsmoused                                                             
+   40 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 ipv6_addrconf                                                         
+   59 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 deferwq                                                               
+  103 root      20   0       0      0      0 S  0.0  0.0   0:00.01 kauditd                                                               
+  229 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 ata_sff                                                               
+  234 root      20   0       0      0      0 S  0.0  0.0   0:00.00 scsi_eh_0                                                             
+  235 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 scsi_tmf_0                                                            
+  236 root      20   0       0      0      0 S  0.0  0.0   0:00.00 scsi_eh_1                                                             
+  237 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 scsi_tmf_1 
+
+</code></pre></div><h3 id="第一行信息"><a href="#第一行信息" aria-hidden="true" class="header-anchor">#</a> 第一行信息</h3> <p>第一行是任务队列信息，同 uptime 命令的执行结果</p> <table><thead><tr><th>值</th> <th>含义</th></tr></thead> <tbody><tr><td>22:46:56</td> <td>系统当前时间</td></tr> <tr><td>3 days, 13:22</td> <td>系统运行时间</td></tr> <tr><td>2 users</td> <td>当前登录用户数</td></tr> <tr><td>load average: 0.00, 0.02, 0.05</td> <td>系统平均负载，三个数值分别为  1分钟、5分钟、15分钟前到现在的平均值。</td></tr></tbody></table> <p><a href="/performance/linux-uptime.html">更多uptime介绍</a></p> <h3 id="第二行为进程信息"><a href="#第二行为进程信息" aria-hidden="true" class="header-anchor">#</a> 第二行为进程信息</h3> <table><thead><tr><th>值</th> <th>含义</th></tr></thead> <tbody><tr><td>Tasks:  65 total</td> <td>进程总数</td></tr> <tr><td>1 running</td> <td>正在运行的进程数</td></tr> <tr><td>28 sleeping</td> <td>睡眠的进程数</td></tr> <tr><td>0 stopped</td> <td>停止的进程数</td></tr> <tr><td>0 zombie</td> <td>僵尸进程数</td></tr></tbody></table> <div class="tip custom-block"><p class="custom-block-title">僵尸进程</p> <p>一个进程使用fork创建子进程，如果子进程退出，而父进程并没有调用wait或waitpid获取子进程的状态信息，那么子进程的进程描述符仍然保存在系统中。这种进程称之为僵死进程。</p></div> <h3 id="第三行cpu的信息"><a href="#第三行cpu的信息" aria-hidden="true" class="header-anchor">#</a> 第三行CPU的信息</h3> <table><thead><tr><th>值</th> <th>含义</th></tr></thead> <tbody><tr><td>0.3 us</td> <td>用户空间占用CPU百分比</td></tr> <tr><td>0.0 sy</td> <td>内核空间占用CPU百分比</td></tr> <tr><td>0.0% ni</td> <td>用户进程空间内改变过优先级的进程占用CPU百分比</td></tr> <tr><td>99.7% id</td> <td>空闲CPU百分比</td></tr> <tr><td>0.0% wa</td> <td>等待输入输出的CPU时间百分比</td></tr> <tr><td>0.0% hi</td> <td>处理硬件中断的CPU时间百分比</td></tr> <tr><td>0.0% si</td> <td>处理软件中断的CPU时间百分比</td></tr> <tr><td>0.0% st</td> <td>这个虚拟机被虚拟化软件(KVM)偷去的CPU时间百分比</td></tr></tbody></table> <div class="tip custom-block"><p class="custom-block-title">说明</p> <ul><li>st：如果当前处于一个KVM下的vm，实际上KVM也是要消耗一部分CPU处理时间的</li></ul></div> <h3 id="第四、五为内存信息"><a href="#第四、五为内存信息" aria-hidden="true" class="header-anchor">#</a> 第四、五为内存信息</h3> <p>第一行是物理内存使用，第二行是虚拟内存使用(交换空间)，和free命令相似。</p> <ul><li>物理内存</li></ul> <table><thead><tr><th>值</th> <th>含义</th></tr></thead> <tbody><tr><td>1016164 total</td> <td>物理内存总量，当前为1016164KB</td></tr> <tr><td>388300 free</td> <td>物理内存空闲量，当前为388300KB</td></tr> <tr><td>58204 used</td> <td>物理内存已经使用量，当前为58204KB</td></tr> <tr><td>569660 buff/cache</td> <td>用于缓冲和缓存的内存空间</td></tr></tbody></table> <ul><li>虚拟内存</li></ul> <table><thead><tr><th>值</th> <th>含义</th></tr></thead> <tbody><tr><td>0 total</td> <td>虚拟内存总量，当前为0KB</td></tr> <tr><td>0 free</td> <td>虚拟内存空闲量，当前为0KB</td></tr> <tr><td>0 used</td> <td>虚拟内存已经使用量，当前为0KB</td></tr> <tr><td>799148 avail Mem</td> <td>可用内存空间，当前799148KB</td></tr></tbody></table> <h3 id="进程信息"><a href="#进程信息" aria-hidden="true" class="header-anchor">#</a> 进程信息</h3> <p>以下为所有进程信息，包括不默认显示的</p> <table><thead><tr><th>列名</th> <th>含义</th></tr></thead> <tbody><tr><td>PID</td> <td>进程id</td></tr> <tr><td>PPID</td> <td>父进程id</td></tr> <tr><td>USER</td> <td>进程所有者的用户名</td></tr> <tr><td>RUSER</td> <td>Real user name</td></tr> <tr><td>UID</td> <td>进程所有者的用户id</td></tr> <tr><td>GROUP</td> <td>进程所有者的组名</td></tr> <tr><td>TTY</td> <td>启动进程的终端名</td></tr> <tr><td>PR</td> <td>优先级</td></tr> <tr><td>NI</td> <td>nice值。负值表示高优先级，正值表示低优先级</td></tr> <tr><td>P</td> <td>最后使用的CPU，仅在多CPU环境下有意义</td></tr> <tr><td>%CPU</td> <td>上次更新到现在的CPU时间占用百分比</td></tr> <tr><td>TIME</td> <td>进程使用的CPU时间总计，单位秒</td></tr> <tr><td>TIME+</td> <td>进程使用的CPU时间总计，单位1/100秒</td></tr> <tr><td>%MEM</td> <td>进程使用的物理内存百分比</td></tr> <tr><td>VIRT</td> <td>进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES</td></tr> <tr><td>SWAP</td> <td>进程使用的虚拟内存中，被换出的大小，单位kb。 SWAP = VIRT - RES</td></tr> <tr><td>RES</td> <td>进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA(应用程序真的使用的内存)</td></tr> <tr><td>CODE</td> <td>可执行代码占用的物理内存大小，单位kb</td></tr> <tr><td>DATA</td> <td>可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb</td></tr> <tr><td>SHR</td> <td>共享内存大小，单位kb</td></tr> <tr><td>nFLT</td> <td>进程启动以来页面错误的次数(这个值过高意味着进程从磁盘读取大量资源)</td></tr> <tr><td>nDRT</td> <td>最后一次写入到现在被修改过的页面数。(通常小于10或者为0)</td></tr> <tr><td>S</td> <td>进程状态</td></tr> <tr><td>COMMAND</td> <td>命令名/命令行</td></tr> <tr><td>WCHAN</td> <td>若该进程在睡眠，则显示睡眠中的系统函数名</td></tr></tbody></table> <div class="tip custom-block"><p class="custom-block-title">说明</p> <p>进程状态</p> <ul><li>D：不可中断的睡眠状态</li> <li>R：运行</li> <li>S：睡眠</li> <li>T：跟踪/停止</li> <li>Z：僵尸进程</li></ul></div></div> <div class="page-edit"><!----> <!----></div> <div class="page-nav"><p class="inner"><span class="prev">
+        ←
+        <a href="/performance/linux-uptime.html" class="prev">
+          Linux命令：uptime
+        </a></span> <!----></p></div> </div> <!----></div></div>
+    <script src="/assets/js/29.157090a4.js" defer></script><script src="/assets/js/app.a182c574.js" defer></script>
+  </body>
+</html>
